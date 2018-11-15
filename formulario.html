@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ANIMEs CRUD</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="funcoes.js"></script>
+    <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+    <h1>DIW LAB FAKE DB - ANIME CRUD</h1>
+    <a href="main.html"><button id="volta">Voltar</button></a>
+    <H2>Formulário(Inclusão/Alteração)</H2>
+    
+    <form id="frmCadastro">
+        <ul>
+            <li>
+                <label for="txtCodigo">Código:</label>
+                <input type="text" id="txtCodigo" />
+            </li>
+            <li>
+                <label for="txtNome">Nome:</label>
+                <input type="text" id="txtNome" />
+            </li>
+            <li>
+                <label for="txtGenero">Gênero:</label>
+                <input type="text" id="txtGenero" />
+            </li>
+            <li>
+                <label for="txtSubGenero">Sub-Gênero:</label>
+                <input type="text" id="txtSubGenero" />
+            </li>
+            <li>
+                <label for="txtTemporadas">Temporadas:</label>
+                <input type="text" id="txtTemporadas" />
+            </li>
+            <li>
+                <label for="txtEpisodios">Episódios:</label>
+                <input type="text" id="txtEpisodios" />
+            </li>
+            <li>
+                <label for="txtLancamento">Lançamento:</label>
+                <input type="date" id="txtLancamento" />
+            </li>
+            <li>
+                <input type="submit" value="Salvar" id="btnSalvar" />
+            </li>
+        </ul>
+    </form>
+    <p id="demo"></p>
+
+    <script>
+        var tbClientes = localStorage.getItem("tbClientes");// Recupera os dados armazenados
+        var animes = JSON.parse(tbClientes);
+        document.getElementById("demo").innerHTML = animes;
+    </script>
+
+</body>
+</html>
