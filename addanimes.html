@@ -70,15 +70,15 @@
                     <input class="form-control" id="addStudio" required placeholder="Digite aqui informações sobre o anime"></input>
                 </div>
             </form>
-            <a><button class="botton" type="submit" id="btnSalvar"> Salvar</button></a>
-            <a href="index.html"><input class="botton" type="button" value="Voltar" /></a>
+            <a><button class="button" type="submit" id="btnSalvar"> Salvar</button></a>
+            <a href="index.html"><input class="button" type="button" value="Voltar" /></a>
         </div>
     </div>
+    <p id="b64"></p>
     <script>
         function PreviewImage() {
             var oFReader = new FileReader();
             oFReader.readAsDataURL(document.getElementById("files").files[0]);
-
             oFReader.onload = function (oFREvent) {
                 document.getElementById("imageContainer").src = oFREvent.target.result;
                 document.getElementById("b64").innerHTML = oFREvent.target.result;
