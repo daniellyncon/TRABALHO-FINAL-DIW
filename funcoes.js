@@ -1,197 +1,190 @@
-$(function(){
-	
 
-	var operacao = "A"; //"A"=Adição; "E"=Edição
+
+
+$(function () {
 
 	var indice_selecionado = -1;
 
-	var tbClientes = localStorage.getItem("tbClientes");// Recupera os dados armazenados
-	var editarIndex = localStorage.getItem("index");
+	var tbAnimes = localStorage.getItem("tbAnimes");// Recupera os dados armazenados
 
-	tbClientes = JSON.parse(tbClientes); // Converte string para objeto
 
-	if(tbClientes == null) // Caso não haja conteúdo, iniciamos um vetor vazio
-		tbClientes = [];
+	tbAnimes = JSON.parse(tbAnimes); // Converte string para objeto
 
-	function Adicionar(){
-		var cli = GetCliente("Codigo", $("#txtCodigo").val());
+	if (tbAnimes == null) // Caso não haja conteúdo, iniciamos um vetor vazio
+		tbAnimes = [];
 
-		if(cli != null){
+	$(".corpo").on("click","#btnAdicionar",function() {
+		var anm = GetAnime("Código", $("#addCode").val());
+		if (anm != null) {
 			alert("Código já cadastrado.");
 			return;
 		}
-
-		var cliente = JSON.stringify({
-			Codigo: $("#txtCodigo").val(),
-			Nome: $("#txtNome").val(),
-			Genero: $("#txtGenero").val(),
-			SubGenero: $("#txtSubGenero").val(),
-			Temporadas: $("#txtTemporadas").val(),
-			Episodios: $("#txtEpisodios").val(),
-			Lancamento: $("#txtLancamento").val()
+		var anime = JSON.stringify({
+			Código: $("#addCode").val(),
+			Nome: $("#addName").val(),
+			Gênero: $("#addGender").val(),
+			Autor: $("#addAuthor").val(),
+			Diretor: $("#addDirector").val(),
+			Temporadas: $("#addSeasons").val(),
+			Episódios: $("#addEpisodes").val(),
+			Lançamento: $("#addLaunch").val(),
+			Estudio: $("#addStudio").text(),
+			Imagem: $('#b64').text()
 		});
-
-		tbClientes.push(cliente);
-
-		localStorage.setItem("tbClientes", JSON.stringify(tbClientes));
-
-		alert("Anime adicionado.");
-		return true;
-	}
+		tbAnimes.push(anime);
+		localStorage.setItem("tbAnimes", JSON.stringify(tbAnimes));
+		if (confirm("Anime adicionado com sucesso! Pressione OK para voltar a página principal e cancelar para adicionar mais animes.")) {
+			url = 'index.html'
+			window.open(url, "_self");
+		}
+	});
 
 	//Mostra os dados do elemento no modal
-	function view(){
-        var index = parseInt(localStorage.getItem("index"));
-        var tbClientes = localStorage.getItem("tbClientes");
-        tbClientes = JSON.parse(tbClientes); 
-        var current = JSON.parse(tbClientes[index]);
-        console.log(index);
-        console.log(current);
-		console.log(current.Nome);
-		$("#Codigo").text(current.Codigo);
-		$("#Nome").text(current.Nome);
-		$("#Genero").text(current.Genero);
-		$("#SubGenero").text(current.SubGenero);
-		$("#Temporadas").text(current.Temporadas);
-		$("#Episodios").text(current.Episodios);
-		$("#Lancamento").text(current.Lancamento);
-	}
-		
-	//edita os dados do elemento na pagina de edição
-	function Editar(){
-
+	function view() {
 		var index = parseInt(localStorage.getItem("index"));
-
-
-		tbClientes[index] = JSON.stringify({
-			Codigo: $("#txtCodigo").val(),
-			Nome: $("#txtNome").val(),
-			Genero: $("#txtGenero").val(),
-			SubGenero: $("#txtSubGenero").val(),
-			Temporadas: $("#txtTemporadas").val(),
-			Episodios: $("#txtEpisodios").val(),
-			Lancamento: $("#txtLancamento").val()
-		});
-		localStorage.setItem("tbClientes", JSON.stringify(tbClientes));
-		alert("Informações editadas.")
-		operacao = "A";
-		return true;
+		var tbAnimes = localStorage.getItem("tbAnimes");
+		tbAnimes = JSON.parse(tbAnimes);
+		var current = JSON.parse(tbAnimes[index]);
+		$("#viewCode").text(current.Código);
+		$("#viewName").text(current.Nome);
+		$("#viewGender").text(current.Gênero);
+		$("#viewAuthor").text(current.Autor);
+		$("#viewDirector").text(current.Diretor);
+		$("#viewSeasons").text(current.Temporadas);
+		$("#viewEpisodes").text(current.Episódios);
+		$("#viewLaunch").text(current.Lançamento);
+		$("#viewStudio").text(current.Estudio);
+		carregarImagem()
 	}
 
-	function Listar(){
+	function carregarImagem() {
+		var index = parseInt(localStorage.getItem("index"));
+		var tbAnimes = localStorage.getItem("tbAnimes");
+		tbAnimes = JSON.parse(tbAnimes);
+		var current = JSON.parse(tbAnimes[index]);
+		imgContainer = document.getElementById('imageContainer');
+		imgContainer.src = current.Imagem;
+
+	};
+
+	//captura o clique no botao salvar da pagina editar e edita os dados do cadastro
+	$(".corpo").on("click", "#btnSalvar", function () {
+			var index = parseInt(localStorage.getItem("index"));
+			tbAnimes[index] = JSON.stringify({
+				Código: $("#addCode").val(),
+				Nome: $("#addName").val(),
+				Gênero: $("#addGender").val(),
+				Autor: $("#addAuthor").val(),
+				Diretor: $("#addDirector").val(),
+				Temporadas: $("#addSeasons").val(),
+				Episódios: $("#addEpisodes").val(),
+				Lançamento: $("#addLaunch").val(),
+				Estudio: $("#addStudio").val(),
+				Imagem: $('#b64').text()
+			});
+
+			localStorage.setItem("tbAnimes", JSON.stringify(tbAnimes));
+			console.log(tbAnimes);
+			if(confirm("Informações editadas com sucesso. Retornar a página inicial?")){
+			url = 'index.html'
+			window.open(url, "_self");
+		};
+	});
+	
+
+	function Listar() {
 		$("#tblListar").html("");
 		$("#tblListar").html(
-			"<thead>"+
-			"	<tr>"+
-			"	<th>Opções</th>"+
-			"	<th>Código</th>"+
-			"	<th>Nome</th>"+
-			"	<th>Genero</th>"+
-			"	</tr>"+
-			"</thead>"+
-			"<tbody>"+
+			"<thead>" +
+			"	<tr>" +
+			"	<th>Opções</th>" +
+			"	<th>Nome</th>" +
+			"	<th>Gênero</th>" +
+			"	<th>Episódios</th>" +
+			"	</tr>" +
+			"</thead>" +
+			"<tbody>" +
 			"</tbody>"
-			);
+		);
 
-		 for(var i in tbClientes){
-			var cli = JSON.parse(tbClientes[i]);
-		  	$("#tblListar tbody").append("<tr>"+
-									 	 "	<td><a href='#janela1' rel='modal'><button alt='"+i+"' class='btnView'>Visualizar</button><button alt='"+i+"' class='btnEditar'>Editar</button><button alt='"+i+"' class='btnExcluir'>Excluir</button></td>" + 
-										 "	<td>"+cli.Codigo+"</td>" + 
-										 "	<td>"+cli.Nome+"</td>" + 
-										 "	<td>"+cli.Genero+"</td>" + 
-		  								 "</tr>");
-		 }
+		for (var i in tbAnimes) {
+			var anm = JSON.parse(tbAnimes[i]);
+			$("#tblListar tbody").append("<tr>" +
+				"	<td><a href='#janela1' rel='modal'><button alt='" + i + "' class='btnView'>Visualizar</button></a><button alt='" + i + "' class='btnEditar'>Editar</button><button alt='" + i + "' class='btnExcluir'>Excluir</button></td>" +
+				"	<td>" + anm.Nome + "</td>" +
+				"	<td>" + anm.Gênero + "</td>" +
+				"	<td>" + anm.Episódios + "</td>" +
+				"</tr>");
+		}
 	}
 
-	
 
-	function Excluir(){
-		tbClientes.splice(indice_selecionado, 1);
-		localStorage.setItem("tbClientes", JSON.stringify(tbClientes));
+
+	function Excluir() {
+		tbAnimes.splice(indice_selecionado, 1);
+		localStorage.setItem("tbAnimes", JSON.stringify(tbAnimes));
 		alert("Anime excluído.");
 	}
-	
 
-	function GetCliente(propriedade, valor){
+
+	function GetAnime(propriedade, valor) {
 		var cli = null;
-        for (var item in tbClientes) {
-            var i = JSON.parse(tbClientes[item]);
-            if (i[propriedade] == valor)
-                cli = i;
-        }
-        return cli;
+		for (var item in tbAnimes) {
+			var i = JSON.parse(tbAnimes[item]);
+			if (i[propriedade] == valor)
+				cli = i;
+		}
+		return cli;
 	}
 
 	Listar();
 
-	$("#frmCadastro").on("submit",function(){
-		return Adicionar();	
-	});
-
-
-	$("#frmEditar").on("submit",function(){
-		return Editar();	
-	});
-
-	
-
-	$("#tblListar").on("click", ".btnEditar", function(){
+	//pega o index do anime(row) escolhido e direciona para edição
+	$("#tblListar").on("click", ".btnEditar", function () {
 		indice_selecionado = parseInt($(this).attr("alt"));
-
 		localStorage.setItem("index", indice_selecionado.toString());
-		localStorage.setItem("tbClientes", JSON.stringify(tbClientes));
-	
-		console.log(indice_selecionado);
-		
-		window.location.href = "editar.html"
-		
+		localStorage.setItem("tbAnimes", JSON.stringify(tbAnimes));
+		window.location.href = "edtanimes.html"
 	});
 
-	$("#tblListar").on("click", ".btnExcluir", function(){
+	//seleciona o item para excluir
+	$("#tblListar").on("click", ".btnExcluir", function () {
 		indice_selecionado = parseInt($(this).attr("alt"));
 		Excluir();
 		Listar();
 	});
 
 
-
-	$("#tblListar").on("click", ".btnView", function(){
-		
+	//captura o click no botao visualizar para exibiur o modal
+	$("#tblListar").on("click", ".btnView", function () {
 		indice_selecionado = parseInt($(this).attr("alt"));
 		localStorage.setItem("index", indice_selecionado.toString());
-		localStorage.setItem("tbClientes", JSON.stringify(tbClientes));
-		
+		localStorage.setItem("tbAnimes", JSON.stringify(tbAnimes));
 		view();
 	});
 
-	$(document).ready(function(){
-		$("a[rel=modal]").click( function(ev){
+
+
+	//manipula a pagina 
+	$(document).ready(function () {
+		$("a[rel=modal]").click(function (ev) {
 			ev.preventDefault();
-	 
 			var id = $(this).attr("href");
-	 
 			var alturaTela = $(document).height();
 			var larguraTela = $(window).width();
-		 
-			//colocando o fundo preto
-			$('#mascara').css({'width':larguraTela,'height':alturaTela});
-			$('#mascara').fadeIn(1000); 
-			$('#mascara').fadeTo("slow",0.8);
-	 
-			var left = ($(window).width() /2) - ( $(id).width() / 2 );
-			var top = ($(window).height() / 2) - ( $(id).height() / 2 );
-		 
-			$(id).css({'top':top,'left':left});
-			$(id).show();   
+			$('#mascara').css({ 'width': larguraTela, 'height': alturaTela });
+			$('#mascara').fadeIn(1000);
+			$('#mascara').fadeTo("slow", 0.8);
+			var left = ($(window).width() / 3) - ($(id).width() / 3);
+			var top = ($(window).height() / 3) - ($(id).height() / 3);
+			$(id).css({ 'top': top, 'left': left });
+			$(id).show();
 		});
-	 
-		$("#mascara").click( function(){
+		$("#mascara").click(function () {
 			$(this).hide();
 			$(".window").hide();
 		});
-	 
-		$('.fechar').click(function(ev){
+		$('.fechar').click(function (ev) {
 			ev.preventDefault();
 			$("#mascara").hide();
 			$(".window").hide();
