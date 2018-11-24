@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ANIMEs CRUD</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="funcoes.js"></script>
+    <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+    <div class="corpo">
+        <div id="frmEditar">
+            <div class="header">
+                <h2>AniCRUD - Formulário de Inclusão/Alteração</h1>
+            </div>
+            <h3>
+                <button type="submit" id="btnSalvar"> Salvar</button></a><button id="btnVoltar" onclick="redirect()">Voltar</button>
+            </h3>
+            <form class="formulario">
+                <div id="comunista">
+                    <img id="imageContainer" src="" width="200px" height="300px" />
+                </div>
+                <div id="facista">
+                    <div id="comunitasRow">
+                        <label for="files">Imagem:</label>
+                        <input type="file" class="form-control" id="files" name="file[]" onchange="PreviewImage();" />
+
+                    </div>
+                    <div id="comunitasRow">
+                        <label for="addCode">Código:</label>
+                        <input style="background-color:#eeeeeed2" type="text" class="form-control" id="addCode" disabled="disabled" placeholder="Informe um código para o anime" />
+                    </div>
+                    <div id="comunitasRow">
+                        <label for="addName">Nome:</label>
+                        <input type="text" class="form-control" id="addName" required placeholder="Informe o nome do anime" />
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <label for="addGender">Gênero:</label>
+                    <input type="text" class="form-control" id="addGender" required placeholder="Informe o gênero do anime" />
+                </div>
+
+                <div class="col-sm-8">
+                    <label for="addAuthor">Autor:</label>
+                    <input type="text" class="form-control" id="addAuthor" required placeholder="Informe o nome do autor" />
+                </div>
+                <div class="col-sm-8">
+                    <label for="addDirector">Diretor:</label>
+                    <input type="text" class="form-control" id="addDirector" required placeholder="Informe o nome do diretor" />
+                </div>
+                <div class="col-sm-8">
+                    <label for="addSeasons">Temporadas:</label>
+                    <input type="text" class="form-control" id="addSeasons" required placeholder="Informe a quantidade de temporadas">
+                </div>
+                <div class="col-sm-8">
+                    <label for="addEpisodes">Episódios:</label>
+                    <input type="text" class="form-control" id="addEpisodes" required placeholder="Informe a quantidade de episódios">
+                </div>
+                <div class="col-sm-8">
+                    <label for="addLaunch">Lançamento:</label>
+                    <input type="text" class="form-control" id="addLaunch" required placeholder="Informe a data de lançamento" />
+                </div>
+                <div class="col-sm-8">
+                    <label for="addStudio">Estúdio:</label>
+                    <input class="form-control" id="addStudio" required placeholder="Informe o estúdio que o produziu o anime" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <p id="b64"></p>
+    <script>
+        // Recupera os dados armazenados do index ao ser redirecionado da index
+        var index = parseInt(localStorage.getItem("index"));
+        var tbAnimes = localStorage.getItem("tbAnimes");
+        tbAnimes = JSON.parse(tbAnimes);
+        var current = tbAnimes[index];
+        $("#addCode").val(current.Codigo);
+        $("#addName").val(current.Nome);
+        $("#addGender").val(current.Genero);
+        $("#addAuthor").val(current.Autor);
+        $("#addDirector").val(current.Diretor);
+        $("#addSeasons").val(current.Temporadas);
+        $("#addEpisodes").val(current.Episodios);
+        $("#addLaunch").val(current.Lancamento);
+        $("#addStudio").val(current.Estudio);
+        imgContainer = document.getElementById('imageContainer');
+        imgContainer.src = current.Imagem;
+        document.getElementById("b64").innerHTML = current.Imagem;
+        //função para previsualizar a imagem e armazernar o base64 para subir no json
+        function PreviewImage() {
+            var oFReader = new FileReader();
+            oFReader.readAsDataURL(document.getElementById("files").files[0]);
+            oFReader.onload = function (oFREvent) {
+                document.getElementById("imageContainer").src = oFREvent.target.result;
+                document.getElementById("b64").innerHTML = oFREvent.target.result
+            };
+        };
+        function redirect() {
+            url = 'index.html';
+            window.open(url, "_self")
+        }
+    </script>
+
+</body>
+
+</html>

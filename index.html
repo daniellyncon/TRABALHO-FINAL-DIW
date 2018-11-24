@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ANIMEs CRUD</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script type="text/javascript" src="funcoes.js"></script>
+    <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body onload="verificarDB()">
+    <div id="tabela">
+        <div class="header">
+
+            <h1><strong>AniCRUD - CRUD de Animes</strong></h1>
+            <h2>Listagem de Registros </h2>
+            <h3><a href="addanimes.html">Adicionar Novo</a></h3>
+        </div>
+        <!--    tabela que recebe os animes cadastrados -->
+        <table id="tblListar">
+
+        </table>
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">x</span>
+                <img style="align-self: center" id="imageContainer" src="" width="200px" height="300px" />
+                <br>
+                        <p>Código : <span id="viewCode"></span></p>
+                        <p>Nome : <span id="viewName"></span></p>
+                        <p>Gênero : <span id="viewGender"></span></p>
+                        <p>Autor : <span id="viewAuthor"></span></p>
+                        <p>Diretor : <span id="viewDirector"></span></p>
+                        <p>Temporadas : <span id="viewSeasons"></span></p>
+                        <p>Episodios : <span id="viewEpisodes"></span></p>
+                        <p>Lancamento : <span id="viewLaunch"></span></p>
+                        <p>Estúdio: <span id="viewStudio"></span></p>
+                    </div>
+                
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    
+
+    </div>
+    <script>
+        function Listar() {
+		$("#tblListar").html("");
+		$("#tblListar").html(
+			"<thead>" +
+			"	<tr>" +
+			"	<th>Opções</th>" +
+			"	<th>Nome</th>" +
+			"	<th>Gênero</th>" +
+			"	<th>Episódios</th>" +
+			"	</tr>" +
+			"</thead>" +
+			"<tbody>" +
+			"</tbody>"
+		);
+        var tbAnimes = JSON.parse(localStorage.getItem('tbAnimes'));
+		for (i = 0; i < tbAnimes.length; i++) {
+			var anm = tbAnimes[i];
+			$("#tblListar tbody").append("<tr>" +
+				"	<td><button alt='" + i + "' class='btnView'>Visualizar</button></a><button alt='" + i + "' class='btnEditar'>Editar</button><button alt='" + i + "' class='btnExcluir'>Excluir</button></td>" +
+				"	<td>" + anm.Nome + "</td>" +
+				"	<td>" + anm.Genero + "</td>" +
+				"	<td>" + anm.Episodios + "</td>" +
+				"</tr>");
+		}
+	};
+        function verificarDB() {
+            var tbAnimes = localStorage.getItem('tbAnimes');
+            if (localStorage.getItem('tbAnimes')) {
+                
+                tbAnimes = JSON.parse(localStorage.getItem('tbAnimes'));
+                Listar();
+            } else {
+                tbAnimes = []; 
+                var dbfake = {
+                    "data": [
+                        {
+                            "Codigo": "1",
+                            "Nome": "Nanatsu no Taizai",
+                            "Genero": "Ação",
+                            "Autor": "Suzuki Nakaba",
+                            "Diretor": "Okamura Tensai",
+                            "Temporadas": "2",
+                            "Episodios": "48",
+                            "Lancamento": "5 de Outubro de 2014",
+                            "Estudio": "A1 Pictures",
+                            "Imagem": "images/Nanatsu-no-taizai-min.png"
+                        },
+                        {
+                            "Codigo": "2",
+                            "Nome": "Ao no Exorcist",
+                            "Genero": "Sobrenatural",
+                            "Autor": "Kazue Kato",
+                            "Diretor": "Okamura Tensai",
+                            "Temporadas": "1",
+                            "Episodios": "25",
+                            "Lancamento": "17 de abril de 2011",
+                            "Estudio": "A1 Pictures",
+                            "Imagem": "images/Ao-no-Exorcist-2.jpg"
+                        },
+                        {
+                            "Codigo": "3",
+                            "Nome": "Naruto Clássico",
+                            "Genero": "Artes Marciais",
+                            "Autor": "Masashi Kishimoto",
+                            "Diretor": "Hayato Dat",
+                            "Temporadas": "8",
+                            "Episodios": "220",
+                            "Lancamento": "3 de outubro de 2002",
+                            "Estudio": "Studio Pierrot",
+                            "Imagem": "images/Naruto-classico-dublado-poster.jpg"
+                        },
+                        {
+                            "Codigo": "4",
+                            "Nome": "Higurashi no Naku Koro ni",
+                            "Genero": "Terror",
+                            "Autor": "Toshifumi Kawase",
+                            "Diretor": "Chiaki Kon",
+                            "Temporadas": "1",
+                            "Episodios": "26",
+                            "Lancamento": "4 de abril de 2006",
+                            "Estudio": "Studio Deen",
+                            "Imagem": "images/Higurashi-no-Naku-Koro-ni-poster.jpg"
+                        },
+                        {
+                            "Codigo": "5",
+                            "Nome": "Sword Art ONLINE",
+                            "Genero": "Romance",
+                            "Autor": "Kawahara Reki",
+                            "Diretor": "Itou Tomohiko",
+                            "Temporadas": "3",
+                            "Episodios": "75",
+                            "Lancamento": "2012",
+                            "Estudio": "Studio Deen",
+                            "Imagem": "images/sword-art-online-poster.png"
+                        }
+                    ]
+
+                }
+
+                $("#tblListar").html("");
+                $("#tblListar").html(
+                    "<thead>" +
+                    "	<tr>" +
+                    "	<th>Opções</th>" +
+                    "	<th>Nome</th>" +
+                    "	<th>Gênero</th>" +
+                    "	<th>Episódios</th>" +
+                    "	</tr>" +
+                    "</thead>" +
+                    "<tbody>" +
+                    "</tbody>"
+                );
+                for (i = 0; i < dbfake.data.length; i++) {
+                    var animeFake = dbfake.data[i];
+                    $("#tblListar tbody").append("<tr>" +
+                        "	<td><button alt='" + i + "' class='btnView'>Visualizar</button></a><button alt='" + i + "' class='btnEditar'>Editar</button><button alt='" + i + "' class='btnExcluir'>Excluir</button></td>" +
+                        "	<td>" + animeFake.Nome + "</td>" +
+                        "	<td>" + animeFake.Genero + "</td>" +
+                        "	<td>" + animeFake.Episodios + "</td>" +
+                        "</tr>");
+                    tbAnimes.push(animeFake);
+                    localStorage.setItem("index", i.toString());
+                    localStorage.setItem("tbAnimes", JSON.stringify(tbAnimes))
+                    
+                }
+                location.reload();
+                
+            }
+            // localStorage.getItem("tbAnimes");
+            
+        }
+        
+        // Get the modal
+	var modal = document.getElementById('myModal');
+	
+	// Get the button that opens the modal
+	var btn = document.getElementsByClassName("btnView");
+	
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+	
+	// When the user clicks on the button, open the modal 
+	btn.onclick = function() {
+		modal.style.display = "block";
+	}
+	
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+		modal.style.display = "none";
+	}
+	
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+	}
+    </script>
+
+</body>
+
+</html>

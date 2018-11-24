@@ -1,0 +1,344 @@
+﻿body{
+    font-family:Tahoma;
+    /* background-size: 100%; */
+    background-image: url("https://i.imgur.com/QU5aWln.jpg");
+    background-attachment: fixed;
+}
+
+/* ul{
+	list-style:none;
+}
+
+ul label{
+	width:100px;
+	float:left;
+} */
+
+
+
+h1, h2 {
+    text-align: center;
+    color: white;
+    padding-bottom: 10px;
+}
+h3 {
+    text-align: center;
+}
+
+h3 > a {
+    color: white;
+    border: 2px solid white; 
+    font-size: 25px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #555b61;
+    text-decoration: none;
+}
+
+h3 > a:hover {
+    color: rgba(47, 47, 71, 0.9);
+    text-decoration: none;
+    background: white;
+}
+
+
+td {
+    width: 15%;
+    border: 1px solid #000;
+    font-size: 19px;
+}
+
+#frmEditar{
+	margin: 0 auto;
+    width: 90%;
+    padding: 1em;
+    border-radius: 1em;
+    background-color: rgba(47, 47, 71, 0.9);
+    color: rgb(59, 32, 32);
+    box-shadow: 1px 3px 10px #000;
+}
+
+
+
+#tabela{
+	margin: 0 auto;
+    width: 90%;
+    padding: 1em;
+    box-shadow: 1px 3px 10px #000;
+    border-radius: 1em;
+    background-color: rgba(47, 47, 71, 0.9);
+    
+}
+
+
+
+
+.header h2 {
+    font-style: italic;
+}
+
+
+
+
+#tblListar {
+	border:solid 1px;
+	text-align:center;
+	background:rgba(245, 245, 220, 0.9);
+    border-radius: 6px;
+    margin-top: 20px;
+}
+
+#tblListar tbody tr {
+	border:solid 1px;
+    height:30px;
+    
+}
+
+#btnAdicionar {
+    font-size: 25px;
+    background-color: rgb(0, 41, 128);
+}
+
+#btnSalvar {
+    font-size: 25px;
+    background-color: rgb(0, 41, 128);
+}
+
+#btnAdicionar:hover {
+    text-decoration: none;
+    color: rgb(0, 41, 128);
+    background: rgba(248, 248, 248, 0.9);
+    cursor: pointer;
+    border: solid 2px rgb(0, 41, 128);
+}
+
+#btnSalvar:hover {
+    text-decoration: none;
+    color: rgb(0, 41, 128);
+    background: rgba(248, 248, 248, 0.9);
+    cursor: pointer;
+    border: solid 2px rgb(0, 41, 128);
+}
+
+
+
+#btnVoltar {
+    font-size: 20px;
+    font-size: 25px;
+    background-color: rgb(128, 0, 43);
+}
+
+#btnVoltar:hover {
+    text-decoration: none;
+    color: rgb(128, 0, 43);
+    background: rgba(248, 248, 248, 0.9);
+    cursor: pointer;
+    border: solid 2px rgb(128, 0, 43);
+}
+
+#tblListar button.btnView {
+    font-size: 20px;
+    background-color: green;
+
+}
+#tblListar button.btnView:hover {
+    color: white;
+    text-decoration: none;
+    background: rgba(47, 47, 71, 0.9);;
+    cursor: pointer;
+}
+#tblListar button.btnEditar {
+    font-size: 20px;
+    color: #212529;
+    background-color: #ffc107;
+}
+#tblListar button.btnEditar:hover {
+    color: white;
+    text-decoration: none;
+    background: rgba(47, 47, 71, 0.9);;
+    cursor: pointer;
+}
+#tblListar button.btnExcluir {
+    font-size: 20px;
+    color: #fff;
+    background-color: #dc3545;
+    
+}
+#tblListar button.btnExcluir:hover {
+    color: white;
+    text-decoration: none;
+    background: rgba(47, 47, 71, 0.9);;
+    cursor: pointer;
+}
+
+#tblListar th{
+    border: 1px solid;
+    font-size: 23px;
+    width: 15%;
+    background-color: rgb(166, 168, 168);
+}
+	
+body {font-family: Arial, Helvetica, sans-serif;}
+
+
+
+/* botão fechar do modal */
+.fechar {
+    text-decoration:none;
+    color: rgb(255, 255, 255);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.fechar:hover, .fechar:focus {
+    color: rgb(66, 66, 66);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+label {
+    font-weight: bolder;
+    /*Para ter certeza que todas as labels tem o mesmo tamanho e estão propriamente alinhadas */
+    display: inline-block;
+    width: 150px;
+    text-align: left;
+    padding: 10px;
+    font-size: 18px;
+}
+
+input:focus {
+    
+    border-color: #000;
+}
+
+div #comunitasRow {
+    margin: 0 auto;
+    padding: 0px 0px 2px 10px;
+    box-shadow: 1px 3px 10px #000;
+    background-color: rgb(166, 168, 168);
+}
+
+div .col-sm-8   {
+    display: flex;
+    margin: 0 auto;
+    padding: 8px;
+    box-shadow: 2px 3px 10px #000;
+    background-color: rgb(166, 168, 168);
+}
+
+
+::placeholder {
+    color: rgb(28, 34, 94) !important;
+    opacity: 3;
+}
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: rgb(28, 34, 94) !important;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: rgb(28, 34, 94) !important;
+    opacity:  3;
+ }
+ 
+ #msg {
+     height: 60px;
+ }
+ #grid-contatos tbody {
+     cursor: pointer;
+ }
+
+#comunista {
+    height: 300px;
+    width: 35%;
+    text-align: right;
+    float: left;
+}
+
+
+#facista {
+    margin: 0px 0px 10px 10px;
+    height: 300px;
+    float: left;
+    width: 40%;
+    text-align: left;
+    background-color: rgb(166, 168, 168);
+    border: solid 1px;
+}
+
+div.window > #modalRight {
+    float: left;
+    text-align: left;
+    width: 40%;
+}
+
+
+#b64 {
+    display: none;
+}
+
+#image-container {
+    margin-left: 2px;
+    padding-bottom:5px; 
+}
+
+button {
+    color: white;
+    border: 2px solid white; 
+    font-size: 25px;
+    padding: 5px;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+
+
+button:active{
+    top: 1px;
+    left:1px;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: rgba(47, 47, 71, 0.9);
+    margin: 1% auto; /* 15% from the top and centered */
+    padding: 10px 20px;
+    border: 1px solid #888;
+    width: 500px; /* Could be more or less, depending on screen size */
+    color: #fff;
+    
+}
+
+.modal-content > p {
+    text-align: center;
+    font-weight: bolder;
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
